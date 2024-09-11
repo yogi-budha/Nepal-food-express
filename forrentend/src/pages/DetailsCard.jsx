@@ -34,6 +34,7 @@ function DetailsCard() {
     <>
        <div className='w-full px-52 my-20  '>
       <div>
+      
         <div className='flex items-center gap-24 mb-10 '>
         <img className='rounded-lg shadow-2xl' src={`${url}/image/${singleData.image}`} alt="" />
 
