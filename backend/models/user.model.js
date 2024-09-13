@@ -19,13 +19,15 @@ const userSchema = mongoose.Schema({
         enum:["male","female"]
     },
     avatar:{
-        type:String
+        type:String,
+
     },
     
     cart:{
         type:Object,
-        
+        default:{
+        }
     }
-})
+},{minimize:false})
 
 export const User = mongoose.model("User",userSchema)

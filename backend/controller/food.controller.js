@@ -1,3 +1,4 @@
+import fs from 'fs'
 import { foodModel } from "../models/food.model.js"
 
 
@@ -75,7 +76,7 @@ const fooditemgetController =async (req,res) =>{
 
 const fooditemdeleteController = async (req,res) =>{
 
-    const food = await  foodModel.findOne({email})
+    const food = await  foodModel.findById(req.body.id)
 
     fs.unlink( `uploads/${food.image}`, (err) => {
         if (err) {

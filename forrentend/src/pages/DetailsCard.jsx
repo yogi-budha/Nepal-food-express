@@ -7,7 +7,7 @@ import { StoreContext } from '../Contex/storeContex'
 function DetailsCard() {
 
   const { id } = useParams()
-  const {add_to_cart,remove_from_cart,cartItem} = useContext(StoreContext)
+  const {add_to_cart,remove_from_cart,cartItem,userData} = useContext(StoreContext)
   const [singleData,SetSingleData] = useState({})
 
   const url = 'http://localhost:3000'
@@ -17,12 +17,14 @@ function DetailsCard() {
   function fetchOneData(){
 
     axios.get(`${url}/api/food/${id}`).then((res)=>{
-      console.log(res.data.food)
       SetSingleData(res.data.food)
     })
 
 
   }
+  
+  console.log(userData)
+
 
   useEffect(()=>{
     fetchOneData()
@@ -40,7 +42,7 @@ function DetailsCard() {
 
         <div>
         <p className='text-3xl text-green-800'>Add to Cart: <span>
-          {cartItem[id]}</span></p>
+          {cartItem[id]>0?cartItem[id]:''}</span></p>
         <div className='flex gap-10 p-4 '>
            <button onClick={()=>add_to_cart(id)} className='text-2xl flex items-center justify-center bg-green-600 text-white px-2 py-1 cursor-pointer hover:bg-green-500 rounded-full'><i className="ri-add-line"></i></button>
            <button onClick={()=>remove_from_cart(id)} className='text-2xl flex items-center justify-center bg-green-600 text-white px-2 py-1 cursor-pointer hover:bg-green-500 rounded-full'><i className="ri-subtract-fill"></i></button>

@@ -6,6 +6,7 @@ import path from "path"
 import { fileURLToPath } from 'url';
 import userRoute from './router/user.router.js'
 import cookieParser from 'cookie-parser'
+import cartRouter from './router/cart.router.js'
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -24,6 +25,7 @@ connectDB()
 // Routes
 app.use("/api",foodRoute)
 app.use("/api/user",userRoute)
+app.use("/api/cart",cartRouter)
 
 
 // listner 

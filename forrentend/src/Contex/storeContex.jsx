@@ -19,8 +19,9 @@ import { createContext } from 'react'
   const url = 'http://localhost:3000';
 
 
+  const tokenval = localStorage.getItem('token')
 
-  function add_to_cart(itemId){
+ async function add_to_cart(itemId){
 
     if(!cartItem[itemId]){
       setCartItem((prev)=>({...prev,[itemId]:1}))
@@ -28,12 +29,40 @@ import { createContext } from 'react'
       setCartItem((prev)=>({...prev,[itemId]:cartItem[itemId]+1}))
     }
 
+
+    console.log(tokenval)
+
+    if(tokenval){
+        await axios.post(`${url}/api/cart/addcart`,{itemId}, {
+      headers: {
+        'Authorization': `Bearer ${tokenval}`
+      }
+    }).then((res)=>{
+      console.log(res.data)
+      console.log("first")
+    })
+
+    }
+
+  
   }
 
-  function remove_from_cart(itemId){
+ async function remove_from_cart(itemId){
 
     setCartItem((prev)=>({...prev,[itemId]:cartItem[itemId]-1}))
+
+    if(tokenval){
+       await axios.post(`${url}/api/cart/removecart`,{itemId}, {
+        headers: {
+          'Authorization': `Bearer ${tokenval}`
+        }
+      }).then((res)=>{
+        console.log(res.data)
+       })
+    }
   }
+
+  
 
   function getTotalAmount(){
 

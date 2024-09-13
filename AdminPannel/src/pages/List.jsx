@@ -21,7 +21,7 @@ async function fetchitem(){
  async function removeItem(foodId){
 
 
-  await axios.post("http://localhost:4000/api/food",{id:foodId}).then((res)=>{
+  await axios.post(`http://localhost:3000/api/food/${foodId}`,{id:foodId}).then((res)=>{
    
     toast.success("successuflly deleted")
     fetchitem()
