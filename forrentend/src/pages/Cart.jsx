@@ -1,13 +1,16 @@
-import React, { useContext } from 'react'
+import { useContext } from 'react'
 
-import food1 from '../assets/food_1.png'
 import { StoreContext } from '../Contex/storeContex'
-import { Link, NavLink, useNavigate } from 'react-router-dom'
+import { Link} from 'react-router-dom'
 
 function Cart() {
+    const {foodList,cartItem,remove_from_cart,url, getTotalAmount,cartItemval} = useContext(StoreContext)
 
-    const {foodList,cartItem,remove_from_cart,url} = useContext(StoreContext)
-    const {navigate}=useNavigate()
+
+
+
+   
+
   return (
 
     <>
@@ -55,7 +58,7 @@ function Cart() {
             <div className='flex justify-between flex-col'>
                 <div className='flex justify-between mb-1 text-sm text-zinc-500'>
                    <p>SubTotal</p>
-                <p>RS 12</p> 
+                <p>{cartItemval()?` RS.${getTotalAmount()}` : ""}</p> 
                 </div>
                 <hr className='bg-green-400 text-2xl font-bold h-0.5'/>
                 
@@ -64,7 +67,7 @@ function Cart() {
             <div className='flex justify-between flex-col'>
                 <div className='flex justify-between mb-1 text-sm text-zinc-500'>
                    <p>Delivery Fee</p>
-                <p>RS 12</p> 
+                <p>{cartItemval()?` RS.2` : ""}</p> 
                 </div>
                 <hr className='bg-green-400 text-2xl font-bold h-0.5'/>
                 
@@ -73,7 +76,7 @@ function Cart() {
             <div className='flex justify-between flex-col'>
                 <div className='flex justify-between mb-1 text-sm text-zinc-500'>
                    <p>Total</p>
-                <p>RS 12</p> 
+                <p> {cartItemval()?` RS.${getTotalAmount()+2}` : ""}  </p> 
                 </div>
                 <hr className='bg-green-400 text-2xl font-bold h-0.5'/>
                 

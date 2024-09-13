@@ -10,6 +10,10 @@ import { createContext } from 'react'
 
    const [cartItem,setCartItem] = useState({})
     const [foodList , setfoodList] = useState([])
+    
+  const [userData ,setUserData] = useState({})
+  
+  const [token,setToken ] = useState('')
 
     
   const url = 'http://localhost:3000';
@@ -30,7 +34,30 @@ import { createContext } from 'react'
 
     setCartItem((prev)=>({...prev,[itemId]:cartItem[itemId]-1}))
   }
+
+  function getTotalAmount(){
+
+    let totalAmount = 0
+
+    for(const item in cartItem){
+      if(cartItem[item]>0){
+      let foodinfo =   foodList.find((data)=> data._id === item)
+
+        totalAmount += foodinfo.price * cartItem[item]
+      }
+    }
+
+    return totalAmount
+
+  }
   
+  function cartItemval(){
+    for (const item in cartItem) {
+      console.log(item)
+
+      return item
+    }
+}
 
   const fetchFoodList = async()=>{
 
@@ -43,6 +70,7 @@ import { createContext } from 'react'
 
 
   useEffect(()=>{
+// getTotalAmount()
     fetchFoodList()
   },[])
 
@@ -54,6 +82,10 @@ import { createContext } from 'react'
         foodList, 
         cartItem,
         setfoodList,
+        cartItemval,
+        getTotalAmount,
+        userData,
+        setUserData,token,setToken
 
 
     }

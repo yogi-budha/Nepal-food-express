@@ -1,8 +1,25 @@
 
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import logo from '../assets/logo.jpeg'
+import { useContext } from 'react'
+import { StoreContext } from '../Contex/storeContex'
+import avatar from '../assets/avatar.png'
+import axios from 'axios'
 
 function NavBar() {
+
+    const {cartItemval,userData,url,token,setToken}  = useContext(StoreContext)
+
+    const  navigate = useNavigate();
+
+const fetchLogout = ()=>{
+        localStorage.removeItem("token")
+        setToken("")
+        navigate("/")
+  
+}
+
+
   return (
     <>
     <div className='w-full h-20'>
@@ -29,11 +46,27 @@ function NavBar() {
             <div  className='flex gap-20 items-center text-green-800  '>
                 <Link to={'/cart'}>
                 <div className='relative flex gap-3 '>
-                    <div className='w-2 h-2 bg-red-600 rounded-full absolute -top-0.5 right-0.5'></div>
+                    <div className={`w-2 h-2 ${cartItemval() ? "bg-red-600":""} rounded-full absolute -top-0.5 right-0.5`}></div>
                 <i className="text-3xl ri-shopping-cart-2-line cursor-pointer"></i>
                 </div>
                 </Link>
-                <p className='flex items-center gap-2 cursor-pointer text-sm'><i className=" text-3xl ri-login-circle-line"></i><span className='text-base cursor-pointer'>login</span></p>
+
+                <div className='flex items-center justify-between gap-6'>
+                {
+                   token ? <>
+                   <img className='w-10 rounded-full' src={avatar} alt="" />
+                   <div onClick={fetchLogout} className='flex gap-5 text-lg font-semibold text-green-700 cursor-pointer
+                   logout'>
+                   <i className="ri-logout-circle-line"></i>
+                   logout
+                   </div>
+                   </> :    <Link to={'/loginorSignup'}>
+                   <p className='flex items-center gap-2 cursor-pointer text-sm'><i className=" text-3xl ri-login-circle-line"></i><span className='text-base cursor-pointer'>login</span></p>
+                   </Link>
+                }
+                </div>
+             
+                
             </div>
         </div>
     </div>

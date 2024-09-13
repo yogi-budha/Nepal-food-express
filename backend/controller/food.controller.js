@@ -71,8 +71,29 @@ const fooditemgetController =async (req,res) =>{
     
    }
 }
-const fooditemdeleteController = (req,res) =>{
-    res.send("its woring")
+
+
+const fooditemdeleteController = async (req,res) =>{
+
+    const food = await  foodModel.findOne({email})
+
+    fs.unlink( `uploads/${food.image}`, (err) => {
+        if (err) {
+          console.error('Error deleting file:', err);
+        } else {
+          console.log('File deleted successfully');
+        }
+      })
+      await foodModel.findByIdAndDelete(req.body.id)
+   
+      try {
+       res.json({message:"sucessfully deleted"})
+       
+      } catch (error) {
+   
+       res.json({message:"error"})
+       
+      }
 }
 
 
