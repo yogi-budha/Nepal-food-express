@@ -84,8 +84,10 @@ function Cart() {
             </div>
         
          
-
-            <button className='bg-green-500 rounded-lg text-white py-1 cursor-pointer'>PROCEED TO CHECKOUT</button>
+            <Link className='bg-green-500 rounded-lg text-white py-1 cursor-pointer text-center' to={'/order'}>
+             <button >PROCEED TO CHECKOUT</button>
+            </Link>
+           
         </div>
 
         <div className='w-1/2 flex flex-col gap-3  items-center justify-end'> 

@@ -11,6 +11,7 @@ import {
   createBrowserRouter,
   RouterProvider,
 } from "react-router-dom";
+import Order from './pages/Order.jsx';
 
 
 
@@ -30,6 +31,10 @@ const router = createBrowserRouter([
       {
         path: "/cart",
     element: <Cart/>,
+    },
+      {
+        path: "/order",
+    element: <Order/>,
     },
   ]
   },
